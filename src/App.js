@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./index.css";
 import fetchUsers from "./services/userService";
 import USERS from "./data/users";
@@ -40,6 +40,8 @@ function App() {
         (role === "all" || user.role.toLowerCase() === role)
     );
   }, [users, userInput, role]);
+
+  useEffect(() => {}, []);
 
   return (
     <div className="App">
@@ -98,10 +100,6 @@ function App() {
           </div>
         </div>
       </div>
-
-      <button onClick={loadUsers} disabled={loading}>
-        {loading ? "Loading..." : "load users"}
-      </button>
     </div>
   );
 }
