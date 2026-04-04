@@ -41,7 +41,9 @@ function App() {
     );
   }, [users, userInput, role]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    loadUsers();
+  }, [role]);
 
   return (
     <div className="App">
