@@ -3,6 +3,7 @@ import "./index.css";
 import fetchUsers from "./services/userService";
 import USERS from "./data/users";
 import ROLES from "./data/roles";
+import deleteUser from "./services/deleteUser";
 
 function App() {
   const [userInput, setUserInput] = useState("");
@@ -100,6 +101,12 @@ function App() {
                   <div className="userinfoContainer" key={user.id}>
                     <p>{user.name}</p>
                     <p>{user.role}</p>
+                    <button
+                      onClick={() => handleDeleteUser(user)}
+                      disabled={status === "loading"}
+                    >
+                      Delete
+                    </button>
                   </div>
                 ))
               ))}
