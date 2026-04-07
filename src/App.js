@@ -14,7 +14,7 @@ function App() {
   const [error, setError] = useState(null);
 
   const loadUsers = async () => {
-    setStatus(loading);
+    setStatus("loading");
     setError(null);
 
     try {
@@ -88,20 +88,20 @@ function App() {
           </div>
 
           <div className="userData">
-            {loading ? loading : error ? "" : null}
+            {status === "loading" && <p>Loading...</p>}
+            {status === "error" && <p>Error: {error}</p>}
 
-            {loading && <p>Loading...</p>}
-            {error && <p>Error: {error}</p>}
-            {filteredUsers.length === 0 && !loading && !error ? (
-              <p>No users</p>
-            ) : (
-              filteredUsers.map((user) => (
-                <div className="userinfoContainer" key={user.id}>
-                  <p>{user.name}</p>
-                  <p>{user.role}</p>
-                </div>
-              ))
-            )}
+            {status === "success" &&
+              (filteredUsers.length === 0 ? (
+                <p>No users</p>
+              ) : (
+                filteredUsers.map((user) => (
+                  <div className="userinfoContainer" key={user.id}>
+                    <p>{user.name}</p>
+                    <p>{user.role}</p>
+                  </div>
+                ))
+              ))}
           </div>
         </div>
       </div>
