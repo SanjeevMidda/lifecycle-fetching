@@ -63,6 +63,7 @@ function App() {
             onChange={handleInputChange}
             placeholder="Enter name"
             aria-label="Filter users by name"
+            disabled={status === "loading"}
           />
           <label htmlFor="roleSelect">
             <select
