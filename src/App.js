@@ -16,7 +16,7 @@ function App() {
     setError(null);
 
     try {
-      const usersData = await fetchUsers(USERS);
+      const usersData = await fetchUsers(USERS, role);
       setUsers(usersData);
     } catch (err) {
       setError(err.message);
@@ -87,6 +87,7 @@ function App() {
 
           <div className="userData">
             {loading ? loading : error ? "" : null}
+
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
             {filteredUsers.length === 0 && !loading && !error ? (
