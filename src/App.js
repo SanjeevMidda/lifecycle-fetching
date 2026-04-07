@@ -44,6 +44,19 @@ function App() {
     );
   }, [users, userInput, role]);
 
+  const handleDeleteUser = async (userToDelete) => {
+    const previousUsers = [...users];
+
+    setUserInput((prev) => prev.filter((u) => u.id !== userToDelete.id));
+
+    try {
+      await deleteUser(userToDelete.id);
+    } catch (err) {
+      setUsers(previousUsers);
+      alert(err.message);
+    }
+  };
+
   useEffect(() => {
     loadUsers();
   }, [role]);
