@@ -69,7 +69,7 @@ function App() {
               id="roleSelect"
               value={role}
               onChange={handleDropdownChange}
-              disabled={loading}
+              disabled={status === "loading"}
               aria-label="Filter users by role"
             >
               {ROLES.map((r) => (
