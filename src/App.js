@@ -14,16 +14,16 @@ function App() {
   const [error, setError] = useState(null);
 
   const loadUsers = async () => {
-    setLoading(true);
+    setStatus(loading);
     setError(null);
 
     try {
       const usersData = await fetchUsers(USERS, role);
       setUsers(usersData);
+      setStatus("success");
     } catch (err) {
       setError(err.message);
-    } finally {
-      setLoading(false);
+      setStatus("error");
     }
   };
 
