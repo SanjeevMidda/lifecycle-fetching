@@ -13,6 +13,7 @@ function App() {
   // const [error, setError] = useState(null);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
+  const [deletingIds, setDeletingIds] = useState([]);
 
   const loadUsers = async () => {
     setStatus("loading");
@@ -47,13 +48,27 @@ function App() {
   const handleDeleteUser = async (userToDelete) => {
     const previousUsers = [...users];
 
-    setUserInput((prev) => prev.filter((u) => u.id !== userToDelete.id));
+    const userIndex = previousUsers.findIndex((u) => u.id === userToDelete.id);
+
+    setDeletingIds((prev) => [...prev, userToDelete.id]);
+
+    setUsers((prev) =>
+      Array.isArray(prev) ? prev.filter((u) => u.id !== userToDelete.id) : []
+    );
 
     try {
       await deleteUser(userToDelete.id);
     } catch (err) {
-      setUsers(previousUsers);
-      alert(err.message);
+      setUsers((prev) => {
+        if (prev.some((u) => u.id === userToDelete.id)) return prev;
+        const newUsers = [...prev];
+        newUsers.splice(userIndex, 0, userToDelete);
+        return newUsers;
+      });
+
+      alert(err.message || "Failed to delete user");
+    } finally {
+      setDeletingIds((prev) => prev.filter((id) => id !== userToDelete.id));
     }
   };
 
