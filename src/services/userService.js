@@ -1,6 +1,6 @@
 import USERS from "../data/users";
 
-const fetchUsers = () => {
+const fetchUsers = async () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const usersExist = Math.random() > 0.1;

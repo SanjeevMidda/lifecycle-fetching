@@ -8,7 +8,9 @@ function App() {
   const [userInput, setUserInput] = useState("");
   const [role, setRole] = useState("all");
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
+  const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
 
   const loadUsers = async () => {
