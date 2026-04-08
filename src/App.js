@@ -9,8 +9,7 @@ function App() {
   const [userInput, setUserInput] = useState("");
   const [role, setRole] = useState("all");
   const [users, setUsers] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
+
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
   const [deletingIds, setDeletingIds] = useState([]);
@@ -20,7 +19,7 @@ function App() {
     setError(null);
 
     try {
-      const usersData = await fetchUsers(USERS, role);
+      const usersData = await fetchUsers(USERS);
       setUsers(usersData);
       setStatus("success");
     } catch (err) {
@@ -74,7 +73,7 @@ function App() {
 
   useEffect(() => {
     loadUsers();
-  }, [role]);
+  }, []);
 
   return (
     <div className="App">
@@ -123,7 +122,7 @@ function App() {
 
             {status === "success" &&
               (filteredUsers.length === 0 ? (
-                <p>No users</p>
+                <p>No users found for this filter</p>
               ) : (
                 filteredUsers.map((user) => (
                   <div className="userinfoContainer" key={user.id}>
